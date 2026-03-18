@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { SplitLines } from './Splittext'
+import { SplitLines } from './SplitText'
 import MagneticButton from './MagenticButton'
 
 // ── SET YOUR PHOTO URL HERE ──────────────────────────────────────
