@@ -69,7 +69,7 @@ button { background: none; border: none; font-family: var(--font); cursor: point
 .ham-line-2-open { opacity: 0; transform: scaleX(0); }
 .ham-line-3-open { transform: translateY(-7px) rotate(-45deg); }
 
-.mobile-menu { position: fixed; inset: 0; top: 67px; background: var(--bg); z-index: 10000; display: flex; flex-direction: column; justify-content: space-between; padding: 40px 24px 48px; border-top: 1px solid var(--border); overflow-y: auto; }
+.mobile-menu { position: fixed; inset: 0; top: 67px; background: var(--bg); z-index: 10000; display: flex; flex-direction: column; justify-content: space-between; padding: 20px 24px 48px; border-top: 0px solid var(--border); overflow-y: auto; }
 .mobile-menu-links { display: flex; flex-direction: column; gap: 4px; }
 .mobile-menu-link { display: flex; align-items: center; gap: 16px; font-size: clamp(2rem, 9vw, 3.2rem); font-weight: 800; letter-spacing: -0.04em; color: var(--text); text-decoration: none; padding: 14px 0; border-bottom: 1px solid var(--border); transition: opacity 0.2s; }
 .mobile-menu-link:hover { opacity: 0.5; }
