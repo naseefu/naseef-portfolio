@@ -6,7 +6,7 @@ import MagneticButton from './MagenticButton'
 // ── SET YOUR PHOTO URL HERE ──────────────────────────────────────
 // Paste a direct image URL (Cloudinary, GitHub, etc.)
 // Leave empty string "" to show the animated initials fallback
-const PROFILE_IMAGE_URL = "https://github.com/naseefu/portfolio/blob/main/Untitled%20design%20(1).png?raw=true"
+const PROFILE_IMAGE_URL = "https://github.com/naseefu/naseef-portfolio/blob/main/naseefuDP.png?raw=true"
 // ────────────────────────────────────────────────────────────────
 
 const fadeUp = (delay = 0) => ({
