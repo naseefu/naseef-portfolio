@@ -6,7 +6,12 @@
     "excerpt": "A deep dive into creating tool-calling, context-aware AI agents using Spring AI, Groq, and the @Tool annotation pattern in Spring Boot 3.",
     "date": "Mar 2025",
     "readTime": "8 min read",
-    "tags": ["Spring AI", "Java", "LLM", "Agent"],
+    "tags": [
+      "Spring AI",
+      "Java",
+      "LLM",
+      "Agent"
+    ],
     "emoji": "🤖",
     "bannerImage": "https://github.com/naseefu/portfolio/blob/main/SpringAIImage.png?raw=true",
     "sections": [
@@ -20,15 +25,15 @@
       },
       {
         "heading": "Defining Tools with @Tool",
-        "body": "Any Spring bean method annotated with @Tool becomes available to the LLM. The annotation accepts a name and description — the description is crucial because the model reads it to decide when to invoke the tool.\n\nFor example, a getAlertStatus(String alertId) method described as 'Get the current delivery status of a notification alert by its ID' will be called automatically when a user asks 'What happened to alert #1234?'. The LLM extracts the alertId from the conversation and passes it as a parameter."
+        "body": "Any Spring bean method annotated with @Tool becomes available to the LLM. The annotation accepts a name and description — the description is crucial because the model reads it to decide when to invoke the tool.\n\nFor example, a getAlertStatus(String alertId) method described as \"Get the current delivery status of a notification alert by its ID\" will be called automatically when a user asks \"What happened to alert #1234?\". The LLM extracts the alertId from the conversation and passes it as a parameter."
       },
       {
         "heading": "Guardrails: Keeping the Agent On-Topic",
-        "body": "Without guardrails, users can jailbreak the agent or ask it to do things outside its domain. In Alert Hub Agent, I implemented a three-layer pipeline: topic restriction (reject questions unrelated to alerts), rate limiting (Redis-backed per-user token bucket), and harmful input detection (regex + LLM-as-judge).\n\nThe topic restriction guard runs before the main LLM call, saving tokens and latency. It uses a lightweight classifier prompt: 'Is the following question related to notification alerts? Answer YES or NO.' — cheap, fast, and surprisingly accurate."
+        "body": "Without guardrails, users can jailbreak the agent or ask it to do things outside its domain. In Alert Hub Agent, I implemented a three-layer pipeline: topic restriction (reject questions unrelated to alerts), rate limiting (Redis-backed per-user token bucket), and harmful input detection (regex + LLM-as-judge).\n\nThe topic restriction guard runs before the main LLM call, saving tokens and latency. It uses a lightweight classifier prompt: \"Is the following question related to notification alerts? Answer YES or NO.\" — cheap, fast, and surprisingly accurate."
       },
       {
         "heading": "SSE Streaming with Flux",
-        "body": "Real-time token streaming dramatically improves perceived performance. Spring AI's ChatClient returns a Flux<String> when you call .stream().content(). Wrapping this in a Spring WebFlux endpoint with MediaType.TEXT_EVENT_STREAM_VALUE lets the browser render tokens as they arrive.\n\nOne gotcha: never use ThreadLocal inside a reactive chain. I learned this the hard way when session context disappeared mid-stream. Use ConcurrentHashMap keyed by sessionId instead, and pass context explicitly through the Flux pipeline."
+        "body": "Real-time token streaming dramatically improves perceived performance. Spring AI's ChatClient returns a Flux when you call .stream().content(). Wrapping this in a Spring WebFlux endpoint with MediaType.TEXT_EVENT_STREAM_VALUE lets the browser render tokens as they arrive.\n\nOne gotcha: never use ThreadLocal inside a reactive chain. I learned this the hard way when session context disappeared mid-stream. Use ConcurrentHashMap keyed by sessionId instead, and pass context explicitly through the Flux pipeline."
       },
       {
         "heading": "Key Takeaways",
@@ -43,7 +48,11 @@
     "excerpt": "Everything you need to know about Kafka consumer groups, partition rebalancing, offset strategies, and scaling Spring Boot consumers correctly.",
     "date": "Feb 2025",
     "readTime": "6 min read",
-    "tags": ["Kafka", "Spring Boot", "Distributed Systems"],
+    "tags": [
+      "Kafka",
+      "Spring Boot",
+      "Distributed Systems"
+    ],
     "emoji": "⚡",
     "bannerImage": "https://coralogix.com/wp-content/uploads/2019/06/4-6.png",
     "sections": [
@@ -61,11 +70,11 @@
       },
       {
         "heading": "Handling Rebalances Gracefully",
-        "body": "Consumer group rebalances happen when consumers join or leave. During a rebalance, all consumption pauses — this is the 'stop the world' moment of Kafka. With many partitions and frequent deployments, rebalances can cause noticeable latency spikes.\n\nMitigations: use static group membership (group.instance.id) to give consumers a stable identity across restarts, tune session.timeout.ms and heartbeat.interval.ms appropriately, and consider incremental cooperative rebalancing (partition.assignment.strategy=CooperativeStickyAssignor) which allows unaffected partitions to keep consuming during rebalance."
+        "body": "Consumer group rebalances happen when consumers join or leave. During a rebalance, all consumption pauses — this is the \"stop the world\" moment of Kafka. With many partitions and frequent deployments, rebalances can cause noticeable latency spikes.\n\nMitigations: use static group membership (group.instance.id) to give consumers a stable identity across restarts, tune session.timeout.ms and heartbeat.interval.ms appropriately, and consider incremental cooperative rebalancing (partition.assignment.strategy=CooperativeStickyAssignor) which allows unaffected partitions to keep consuming during rebalance."
       },
       {
         "heading": "The NewTopic Bean in Spring Boot",
-        "body": "Defining a @Bean of type NewTopic in Spring Boot auto-creates the topic at startup if it doesn't exist. Critically, if the topic already exists, Spring does NOT modify it — so if you change the partition count in code, it has no effect on an existing topic.\n\nTo resize partitions on an existing topic, use the Kafka CLI: kafka-topics.sh --alter --topic alerts --partitions 12. Remember: you can only increase partitions, never decrease them, as decreasing would require redistributing existing messages."
+        "body": "Defining a @Bean of type NewTopic in Spring Boot auto-creates the topic at startup if it does not exist. Critically, if the topic already exists, Spring does NOT modify it — so if you change the partition count in code, it has no effect on an existing topic.\n\nTo resize partitions on an existing topic, use the Kafka CLI: kafka-topics.sh --alter --topic alerts --partitions 12. Remember: you can only increase partitions, never decrease them, as decreasing would require redistributing existing messages."
       }
     ]
   },
@@ -76,13 +85,17 @@
     "excerpt": "How Java 21 virtual threads changed everything about non-blocking I/O in Spring Boot, and how to use them without shooting yourself in the foot.",
     "date": "Jan 2025",
     "readTime": "5 min read",
-    "tags": ["Java 21", "Spring Boot", "Concurrency"],
+    "tags": [
+      "Java 21",
+      "Spring Boot",
+      "Concurrency"
+    ],
     "emoji": "🧵",
     "bannerImage": "https://media.licdn.com/dms/image/v2/D5612AQGmUIcLl_hc7g/article-cover_image-shrink_720_1280/B56ZeduhiEHoAI-/0/1750697917249?e=2147483647&v=beta&t=uN1NAYGw8Q4vnBdVPXYPjvAmesNj6mfqKYftNViA0FM",
     "sections": [
       {
         "heading": "Why Virtual Threads Matter",
-        "body": "Traditional platform threads are expensive — each one consumes ~1MB of stack memory and requires OS-level context switching. A server with 10,000 concurrent requests needs 10,000 threads, quickly exhausting memory and CPU. This is why reactive programming (WebFlux, RxJava) emerged: non-blocking I/O with a small thread pool.\n\nVirtual threads change the equation entirely. They're cheap — millions can exist simultaneously — and they're managed by the JVM, not the OS. When a virtual thread blocks on I/O, the JVM parks it and runs another on the same carrier thread. You get non-blocking performance with blocking code."
+        "body": "Traditional platform threads are expensive — each one consumes ~1MB of stack memory and requires OS-level context switching. A server with 10,000 concurrent requests needs 10,000 threads, quickly exhausting memory and CPU. This is why reactive programming (WebFlux, RxJava) emerged: non-blocking I/O with a small thread pool.\n\nVirtual threads change the equation entirely. They are cheap — millions can exist simultaneously — and they are managed by the JVM, not the OS. When a virtual thread blocks on I/O, the JVM parks it and runs another on the same carrier thread. You get non-blocking performance with blocking code."
       },
       {
         "heading": "Enabling Virtual Threads in Spring Boot 3.2+",
@@ -90,15 +103,15 @@
       },
       {
         "heading": "The ThreadLocal Trap",
-        "body": "Virtual threads expose a long-standing anti-pattern: ThreadLocal misuse. Libraries that use ThreadLocal for request-scoped data (Spring Security's SecurityContextHolder, MDC logging) work fine because they're reset per-request. The problem is libraries that pool or cache state in ThreadLocal assuming thread reuse — virtual threads are NOT reused.\n\nIn Alert Hub, I hit this when using a connection pool library that cached connections in ThreadLocal. Each virtual thread created a new connection rather than reusing pooled ones, exhausting the database. The fix: ensure your connection pool is configured to be virtual-thread-aware (HikariCP 5.1+ handles this correctly)."
+        "body": "Virtual threads expose a long-standing anti-pattern: ThreadLocal misuse. Libraries that use ThreadLocal for request-scoped data (Spring Security SecurityContextHolder, MDC logging) work fine because they are reset per-request. The problem is libraries that pool or cache state in ThreadLocal assuming thread reuse — virtual threads are NOT reused.\n\nIn Alert Hub, I hit this when using a connection pool library that cached connections in ThreadLocal. Each virtual thread created a new connection rather than reusing pooled ones, exhausting the database. The fix: ensure your connection pool is configured to be virtual-thread-aware (HikariCP 5.1+ handles this correctly)."
       },
       {
         "heading": "Pinning: The Silent Performance Killer",
-        "body": "A virtual thread gets 'pinned' to its carrier thread when it enters a synchronized block or calls a native method. While pinned, the carrier thread cannot run other virtual threads — negating the benefit.\n\nIdentify pinning with -Djdk.tracePinnedThreads=full JVM flag. Common culprits: synchronized methods in legacy libraries (use ReentrantLock instead), and JDBC drivers with synchronized internals (most modern drivers have addressed this). PostgreSQL's pgjdbc 42.7+ and MySQL Connector/J 8.2+ are virtual-thread-safe."
+        "body": "A virtual thread gets pinned to its carrier thread when it enters a synchronized block or calls a native method. While pinned, the carrier thread cannot run other virtual threads — negating the benefit.\n\nIdentify pinning with -Djdk.tracePinnedThreads=full JVM flag. Common culprits: synchronized methods in legacy libraries (use ReentrantLock instead), and JDBC drivers with synchronized internals (most modern drivers have addressed this). PostgreSQL pgjdbc 42.7+ and MySQL Connector/J 8.2+ are virtual-thread-safe."
       },
       {
         "heading": "When to Use Virtual Threads vs WebFlux",
-        "body": "Virtual threads excel at I/O-bound workloads with blocking code — exactly what most Spring MVC applications do. If you're writing new code or maintaining an MVC app, virtual threads are the right choice: simpler code, excellent performance, familiar debugging.\n\nWebFlux still has advantages for streaming scenarios (SSE, WebSocket), back-pressure requirements, and extremely high fan-out with many concurrent downstream calls. For Alert Hub's SSE streaming, I kept WebFlux for the streaming endpoint while using virtual threads for all synchronous processing."
+        "body": "Virtual threads excel at I/O-bound workloads with blocking code — exactly what most Spring MVC applications do. If you are writing new code or maintaining an MVC app, virtual threads are the right choice: simpler code, excellent performance, familiar debugging.\n\nWebFlux still has advantages for streaming scenarios (SSE, WebSocket), back-pressure requirements, and extremely high fan-out with many concurrent downstream calls. For Alert Hub SSE streaming, I kept WebFlux for the streaming endpoint while using virtual threads for all synchronous processing."
       }
     ]
   },
@@ -109,25 +122,30 @@
     "excerpt": "Cache-aside, write-through, and TTL strategies for using Redis effectively in Spring Boot applications handling millions of events daily.",
     "date": "Dec 2024",
     "readTime": "7 min read",
-    "tags": ["Redis", "Caching", "Spring Boot", "Performance"],
+    "tags": [
+      "Redis",
+      "Caching",
+      "Spring Boot",
+      "Performance"
+    ],
     "emoji": "🗄️",
     "bannerImage": "https://ps.w.org/redis-cache/assets/banner-1544x500.png?rev=2315420",
     "sections": [
       {
         "heading": "Cache-Aside: The Default Pattern",
-        "body": "Cache-aside (lazy loading) is the most common pattern: check the cache first, on miss load from the database and populate the cache, on hit return cached data. Spring Boot's @Cacheable annotation implements this with a single annotation.\n\nThe key design decision is TTL. Too short and you get cache churn with many database hits. Too long and users see stale data. For Alert Hub's channel routing config — which changes rarely — I set a 10-minute TTL. For user session data, 5 minutes. For real-time alert status, no caching at all."
+        "body": "Cache-aside (lazy loading) is the most common pattern: check the cache first, on miss load from the database and populate the cache, on hit return cached data. Spring Boot @Cacheable annotation implements this with a single annotation.\n\nThe key design decision is TTL. Too short and you get cache churn with many database hits. Too long and users see stale data. For Alert Hub channel routing config — which changes rarely — I set a 10-minute TTL. For user session data, 5 minutes. For real-time alert status, no caching at all."
       },
       {
         "heading": "Write-Through: Keeping Cache and DB in Sync",
-        "body": "Write-through updates the cache at the same time as the database on every write. Use Spring's @CachePut to implement this. The benefit: the cache is always fresh, eliminating the cold-start problem where the first request after a TTL expiry hits the database.\n\nThe cost: every write pays the cache update overhead. For high-write scenarios this adds latency. Evaluate whether your read/write ratio justifies write-through — it makes sense when reads heavily outnumber writes, which is true for configuration data but not for event logs."
+        "body": "Write-through updates the cache at the same time as the database on every write. Use Spring @CachePut to implement this. The benefit: the cache is always fresh, eliminating the cold-start problem where the first request after a TTL expiry hits the database.\n\nThe cost: every write pays the cache update overhead. For high-write scenarios this adds latency. Evaluate whether your read/write ratio justifies write-through — it makes sense when reads heavily outnumber writes, which is true for configuration data but not for event logs."
       },
       {
         "heading": "Rate Limiting with Redis Token Bucket",
-        "body": "Redis is perfect for distributed rate limiting because it's atomic and shared across all pods. The token bucket algorithm: each user gets a bucket with N tokens. Each request consumes one token. Tokens refill at a fixed rate. If the bucket is empty, reject the request.\n\nImplement with Redis MULTI/EXEC transactions or Lua scripts for atomicity. In Alert Hub's AI guardrail pipeline, I limit each user to 20 AI requests per minute using a sliding window counter: INCR user:{id}:minute:{timestamp/60}, with EXPIRE set to 61 seconds."
+        "body": "Redis is perfect for distributed rate limiting because it is atomic and shared across all pods. The token bucket algorithm: each user gets a bucket with N tokens. Each request consumes one token. Tokens refill at a fixed rate. If the bucket is empty, reject the request.\n\nImplement with Redis MULTI/EXEC transactions or Lua scripts for atomicity. In Alert Hub AI guardrail pipeline, I limit each user to 20 AI requests per minute using a sliding window counter: INCR user:{id}:minute:{timestamp/60}, with EXPIRE set to 61 seconds."
       },
       {
         "heading": "Avoiding Cache Stampede",
-        "body": "Cache stampede (also called thundering herd) occurs when a popular cached item expires and thousands of concurrent requests all miss the cache simultaneously, flooding the database.\n\nMitigations: probabilistic early expiration (refresh the cache slightly before it expires with some probability), mutex locks (only one thread fetches from DB while others wait), or background refresh (a scheduled job proactively refreshes hot keys before they expire). For Alert Hub's routing config, I use background refresh — a @Scheduled task refreshes the cache every 9 minutes, so the 10-minute TTL never actually fires in production."
+        "body": "Cache stampede (also called thundering herd) occurs when a popular cached item expires and thousands of concurrent requests all miss the cache simultaneously, flooding the database.\n\nMitigations: probabilistic early expiration (refresh the cache slightly before it expires with some probability), mutex locks (only one thread fetches from DB while others wait), or background refresh (a scheduled job proactively refreshes hot keys before they expire). For Alert Hub routing config, I use background refresh — a @Scheduled task refreshes the cache every 9 minutes, so the 10-minute TTL never actually fires in production."
       },
       {
         "heading": "Redis Data Structures Beyond String",
@@ -142,21 +160,25 @@
     "excerpt": "Step-by-step implementation of stateless JWT authentication in Spring Boot 3 using the latest Spring Security 6 lambda DSL configuration.",
     "date": "Nov 2024",
     "readTime": "10 min read",
-    "tags": ["JWT", "Spring Security", "Authentication"],
+    "tags": [
+      "JWT",
+      "Spring Security",
+      "Authentication"
+    ],
     "emoji": "🔐",
     "bannerImage": "https://miro.medium.com/v2/resize:fit:1400/1*eNeAR4u9ji45YYn2F7Frxw.jpeg",
     "sections": [
       {
         "heading": "Why JWT for Stateless Auth",
-        "body": "Traditional session-based auth stores session state on the server. This works fine for monoliths but becomes a problem when you scale horizontally — request B might hit a different pod than request A, which doesn't have the session. You need sticky sessions or a shared session store.\n\nJWT solves this by encoding all claims (userId, roles, expiry) inside a cryptographically signed token that the client sends with every request. The server validates the signature and trusts the claims — no database lookup, no shared state. Perfect for microservices."
+        "body": "Traditional session-based auth stores session state on the server. This works fine for monoliths but becomes a problem when you scale horizontally — request B might hit a different pod than request A, which does not have the session. You need sticky sessions or a shared session store.\n\nJWT solves this by encoding all claims (userId, roles, expiry) inside a cryptographically signed token that the client sends with every request. The server validates the signature and trusts the claims — no database lookup, no shared state. Perfect for microservices."
       },
       {
         "heading": "Spring Security 6: The New Lambda DSL",
-        "body": "Spring Security 6 dropped the old WebSecurityConfigurerAdapter extend pattern. The new approach is a SecurityFilterChain @Bean with lambda DSL. The syntax is cleaner and more explicit about what's configured.\n\nKey settings: disable CSRF (stateless APIs don't need it), set session management to STATELESS, configure your public endpoints with permitAll(), and add your JwtAuthenticationFilter before UsernamePasswordAuthenticationFilter."
+        "body": "Spring Security 6 dropped the old WebSecurityConfigurerAdapter extend pattern. The new approach is a SecurityFilterChain @Bean with lambda DSL. The syntax is cleaner and more explicit about what is configured.\n\nKey settings: disable CSRF (stateless APIs do not need it), set session management to STATELESS, configure your public endpoints with permitAll(), and add your JwtAuthenticationFilter before UsernamePasswordAuthenticationFilter."
       },
       {
         "heading": "The JWT Filter",
-        "body": "Create a OncePerRequestFilter that extracts the token from the Authorization header, validates it, extracts the username, loads UserDetails, and sets the SecurityContextHolder. The filter runs on every request before Spring Security's own authentication.\n\nCritical detail: only set authentication in the context if (authentication == null) — don't overwrite existing authentication. And always call filterChain.doFilter(request, response) whether or not the token is valid, letting the security config decide what to do with unauthenticated requests."
+        "body": "Create a OncePerRequestFilter that extracts the token from the Authorization header, validates it, extracts the username, loads UserDetails, and sets the SecurityContextHolder. The filter runs on every request before Spring Security own authentication.\n\nCritical detail: only set authentication in the context if (authentication == null) — do not overwrite existing authentication. And always call filterChain.doFilter(request, response) whether or not the token is valid, letting the security config decide what to do with unauthenticated requests."
       },
       {
         "heading": "Token Generation and Validation with JJWT",
@@ -165,6 +187,272 @@
       {
         "heading": "Refresh Tokens: Handling Expiry Gracefully",
         "body": "Short-lived access tokens (15 min) are secure but annoying if users get logged out constantly. The solution: a separate long-lived refresh token (7-30 days) stored in an HttpOnly cookie (not localStorage — not accessible to JavaScript, immune to XSS).\n\nWhen the access token expires, the client hits /auth/refresh with the refresh token cookie. The server validates the refresh token against a database record (allowing revocation), issues a new access token, and optionally rotates the refresh token. Implement refresh token rotation: each refresh token is single-use, and using a reused refresh token should invalidate the entire refresh token family."
+      }
+    ]
+  },
+  {
+    "id": "jpa-performance-optimization",
+    "num": "06",
+    "title": "JPA Performance Optimization at Scale — Lessons from 20K+ Notifications/Day",
+    "excerpt": "How I identified and fixed a growing JPA persistence context that was silently killing throughput, achieving a 60% reduction in database calls and 50-70% latency improvement.",
+    "date": "Apr 2025",
+    "readTime": "9 min read",
+    "tags": [
+      "JPA",
+      "Spring Boot",
+      "Performance",
+      "Database"
+    ],
+    "emoji": "⚙️",
+    "bannerImage": "",
+    "sections": [
+      {
+        "heading": "The Symptom: Processing Getting Slower Over Time",
+        "body": "Alert Hub was processing thousands of notifications per batch. In early testing everything was fast, but as volume grew, we noticed batch processing times increasing non-linearly — not just a little slower, but exponentially slower as the batch size grew.\n\nThe system was delivering to 20,000+ subscribers per day. A batch that should take 2 seconds was taking 18. Memory pressure was high, GC pauses were spiking, and database CPU was maxing out. The usual suspects — slow queries, missing indexes — were fine. The issue was subtler."
+      },
+      {
+        "heading": "Root Cause: The Growing Persistence Context",
+        "body": "JPA EntityManager maintains a first-level cache called the persistence context. Every entity you load or save gets tracked there — for dirty checking, identity mapping, and cascading. This is valuable for short transactions, but in a long-running batch process, it becomes a liability.\n\nWith each notification processed, the persistence context accumulated more and more managed entities. Dirty checking before each flush scans all tracked entities — so a context holding 5,000 entities does 5,000 comparisons before every save. At 20,000 notifications, this becomes catastrophic. We were also seeing excessive database calls from Hibernate fetching associations lazily inside loops — the classic N+1 problem compounding the issue."
+      },
+      {
+        "heading": "The Fix: Manual Flush and Clear",
+        "body": "The solution was to periodically flush and clear the EntityManager during batch processing. Flush writes pending changes to the database; clear detaches all tracked entities, emptying the persistence context. Together they reset the first-level cache to a fresh state.\n\nI implemented a configurable threshold in application.yml — flush-and-clear every 200-300 entities by default, tunable per environment. The code is simple: after processing each chunk, call entityManager.flush() then entityManager.clear(). The key insight is to do this inside the transaction, after flush but before the next chunk, so data is persisted but memory is freed."
+      },
+      {
+        "heading": "Eliminating N+1 with Batch Fetching and JOIN FETCH",
+        "body": "Beyond the persistence context issue, we had nested queries inside loops — the N+1 problem. For each notification, we were loading the subscriber, then loading their preferences, then loading their channel config — three queries per notification, adding up to 60,000+ queries for a 20,000 notification batch.\n\nThe fix: use JOIN FETCH in JPQL to load entities with their associations in a single query. For cases where JOIN FETCH causes a Cartesian product problem (multiple collections), use @BatchSize on the collection or switch to @EntityGraph with subgraph fetching. Also replaced individual inserts with batch inserts using spring.jpa.properties.hibernate.jdbc.batch_size=50."
+      },
+      {
+        "heading": "Results: 60% Fewer DB Calls, 50-70% Latency Improvement",
+        "body": "After implementing flush/clear with the configurable threshold, switching to JOIN FETCH queries, and enabling batch inserts: database calls dropped by approximately 60%. Processing latency improved by 50-70% — what took 18 seconds now completes in under 5. GC pressure dropped significantly as the persistence context no longer ballooned across the entire batch.\n\nThe lessons: always profile JPA applications under realistic load, not just unit tests. The persistence context is invisible until it hurts you. Batch processing requires a fundamentally different approach to JPA than request-scoped operations. And make thresholds configurable — the right flush interval depends on entity size and available heap."
+      }
+    ]
+  },
+  {
+    "id": "activemq-delayed-messages",
+    "num": "07",
+    "title": "Delayed and Scheduled Notifications with ActiveMQ and Kafka",
+    "excerpt": "Two approaches to implementing delayed message delivery — ActiveMQ native delay and a custom DB-backed Kafka delay scheduler — and when to use each.",
+    "date": "Mar 2025",
+    "readTime": "7 min read",
+    "tags": [
+      "ActiveMQ",
+      "Kafka",
+      "Spring Boot",
+      "Messaging"
+    ],
+    "emoji": "⏰",
+    "bannerImage": "",
+    "sections": [
+      {
+        "heading": "The Problem: Scheduled Notification Delivery",
+        "body": "Alert Hub needed to support delayed notifications — messages that should be delivered at a specific future time rather than immediately. Use cases include: retry after a channel is temporarily unavailable, scheduled marketing alerts, and rate-limited delivery windows that spread load across time.\n\nTwo approaches emerged: leverage ActiveMQ built-in delay feature for simple cases, and build a custom DB-backed scheduler on top of Kafka for more complex scenarios. Both ended up being necessary."
+      },
+      {
+        "heading": "ActiveMQ Native Delay: The Simple Path",
+        "body": "ActiveMQ supports scheduled messages out of the box via message properties. Set the AMQ_SCHEDULED_DELAY property on the message (in milliseconds), and the broker holds the message until the delay has elapsed before delivering it to consumers.\n\nThis works well for simple delays — retry in 5 minutes, deliver at 9 AM tomorrow. The broker handles persistence, so messages survive restarts. The limitation: you cannot easily query or cancel a scheduled message once sent. Also, broker-side scheduling adds load to ActiveMQ itself. For Alert Hub simple retry scenarios, this was the right choice — minimal code, no extra infrastructure."
+      },
+      {
+        "heading": "Custom Kafka Delay: The AN_DELAYEDMESSAGE Approach",
+        "body": "For Kafka, which has no native message delay, we built a custom mechanism using a database table — AN_DELAYEDMESSAGE. When a message needs to be delayed, instead of publishing directly to Kafka, the system persists it to this table with a scheduled_at timestamp and status PENDING.\n\nA @Scheduled Spring task polls the table every 10 seconds, finds messages where scheduled_at is less than or equal to now() and status is PENDING, publishes them to the appropriate Kafka topic, and marks them PROCESSED. This gives you queryability (you can see pending scheduled messages), cancellability (update status to CANCELLED), and flexibility (change the schedule before it fires)."
+      },
+      {
+        "heading": "Choosing Between the Two Approaches",
+        "body": "ActiveMQ native delay wins when: simplicity is paramount, you are already using ActiveMQ for that channel, the delay is short-lived, and you do not need to query or cancel pending messages.\n\nThe DB-backed Kafka scheduler wins when: you need visibility into scheduled messages, messages must survive longer periods (days/weeks), you need cancellation support, or you need to change the schedule after creation. The tradeoff is a polling loop and database dependency, but for enterprise notification systems these are acceptable."
+      },
+      {
+        "heading": "Handling On-Hold and Delayed States",
+        "body": "Beyond scheduled delivery, Alert Hub needed ON_HOLD state — notifications that could not be delivered because the target channel was unreachable, maintenance window active, or recipient preferences blocking delivery. ON_HOLD is different from DELAYED: delayed messages have a specific future delivery time, while on-hold messages wait for a condition to change.\n\nWe built a bulk resend service that queries for notifications in FAILED, ON_HOLD, or DELAYED states and reprocesses them. When a downstream SMS gateway has an outage, we hold all SMS notifications and bulk-resend them once it recovers, without losing a single message."
+      }
+    ]
+  },
+  {
+    "id": "fail-safe-registration-utility",
+    "num": "08",
+    "title": "Building a Fail-Safe Notification Registration Utility",
+    "excerpt": "How we built an-register-utility — a resilience layer that persists alert payloads during ANHUB downtime and replays them after recovery, ensuring zero message loss.",
+    "date": "Feb 2025",
+    "readTime": "6 min read",
+    "tags": [
+      "Spring Boot",
+      "Resilience",
+      "Fault Tolerance",
+      "Database"
+    ],
+    "emoji": "🛡️",
+    "bannerImage": "",
+    "sections": [
+      {
+        "heading": "The Problem: What Happens When ANHUB Goes Down?",
+        "body": "Alert Hub (ANHUB) is an enterprise notification platform. Upstream systems — billing, CRM, operations tools — send alerts to ANHUB registration API. But enterprise systems have maintenance windows, deployments, and unexpected outages. If ANHUB is unavailable when an upstream system calls the registration endpoint, that alert is lost.\n\nFor a business-critical notification platform, losing alerts is unacceptable. A billing alert that does not fire because ANHUB had a 10-minute restart window is a compliance risk and a customer trust issue. We needed a resilience layer."
+      },
+      {
+        "heading": "The Solution: AN_DBREGISTRATION Table",
+        "body": "The an-register-utility is a lightweight Spring Boot application that sits in front of ANHUB registration API. Its sole job: accept incoming alert payloads from upstream systems and guarantee they eventually reach ANHUB.\n\nWhen the utility receives an alert, it immediately persists it to the AN_DBREGISTRATION table with status PENDING and a received_at timestamp. It then attempts to forward it to ANHUB. If ANHUB is available, the payload is forwarded and the record is marked PROCESSED. If ANHUB is unavailable, the record stays PENDING — and the utility returns a success response to the upstream caller anyway. From the caller perspective, the alert was accepted."
+      },
+      {
+        "heading": "Replay After Recovery",
+        "body": "A @Scheduled recovery task polls AN_DBREGISTRATION every 30 seconds for PENDING records. When ANHUB comes back online, the task detects it (via a health check endpoint) and begins replaying PENDING records in order of received_at, oldest first.\n\nReplay uses exponential backoff with a configurable maximum retry count. Records that fail repeatedly (malformed payload, permanent rejection from ANHUB) are moved to DEAD_LETTER status for manual review rather than retried indefinitely. This prevents a bad payload from blocking the replay of valid ones behind it."
+      },
+      {
+        "heading": "Idempotency: Handling Duplicate Delivery",
+        "body": "Replay introduces a risk: if ANHUB received the alert before going down but did not respond, we might deliver it twice during replay. ANHUB must be idempotent — processing the same alert twice should have the same effect as processing it once.\n\nWe addressed this at both ends. The utility generates a stable idempotency key for each alert (hash of source system + alert type + business key). ANHUB checks this key against a deduplication table before processing. If the key exists, it returns a success without reprocessing. The deduplication table is cleaned up after 24 hours, long enough to cover any realistic replay window."
+      },
+      {
+        "heading": "Operational Lessons",
+        "body": "The an-register-utility became one of the most operationally valuable components in the Alert Hub ecosystem. During a major ANHUB deployment that caused 15 minutes of downtime, zero alerts were lost — they queued in AN_DBREGISTRATION and replayed cleanly on recovery.\n\nKey design decisions that made it work: keeping the utility stateless (all state in the database), making the health check configurable, and building a simple admin API to inspect PENDING and DEAD_LETTER records. The pattern — accept immediately, persist, retry asynchronously — is applicable to any system integration that needs resilience."
+      }
+    ]
+  },
+  {
+    "id": "pii-masking-encryption",
+    "num": "09",
+    "title": "PII Masking and Encryption for Secure Notification Payloads",
+    "excerpt": "A practical guide to implementing configurable PII masking with pattern-based redaction and AES encryption for notification payload storage in Spring Boot.",
+    "date": "Jan 2025",
+    "readTime": "6 min read",
+    "tags": [
+      "Security",
+      "Spring Boot",
+      "Encryption",
+      "Compliance"
+    ],
+    "emoji": "🔒",
+    "bannerImage": "",
+    "sections": [
+      {
+        "heading": "Why Notification Systems Handle PII",
+        "body": "Alert Hub processes notification payloads that often contain personally identifiable information — phone numbers for SMS, email addresses, account numbers, names, and sometimes financial data. This data must be stored (for audit trails, replay, and debugging) but storing it in plaintext creates compliance and security risks.\n\nTwo distinct problems need different solutions: masking for display/logging (hiding part of a value so it is recognizable but not usable), and encryption for storage (protecting the full value but allowing retrieval when needed)."
+      },
+      {
+        "heading": "Configurable Pattern-Based PII Masking",
+        "body": "Rather than hardcoding masking rules, we built a configuration-driven approach. In application.yml, each PII field type has a regex pattern to identify it and a masking rule. For example, email addresses show the first 3 characters and domain (na***@gmail.com), phone numbers show only the last 4 digits (******1234), and account numbers show only first and last 2 digits.\n\nThe masking engine scans notification payloads as strings, applies regex patterns to find PII fields, and replaces them with masked versions before logging or displaying in admin UIs. This is one-way — you can see data is there and recognize the type, but cannot recover the original value."
+      },
+      {
+        "heading": "AES Encryption for Storage",
+        "body": "For the full payload stored in the database, we use AES-256-GCM encryption. GCM mode provides both confidentiality and integrity (it detects tampering), making it the right choice over the older CBC mode which has padding oracle vulnerabilities.\n\nThe encryption key is loaded from a key management system (or environment variable for simpler deployments) — never hardcoded. The implementation uses Java javax.crypto.Cipher with AES/GCM/NoPadding. Each stored payload includes the IV (initialization vector) prepended to the ciphertext, since GCM requires a unique IV per encryption. On retrieval, the IV is extracted and the payload is decrypted before processing."
+      },
+      {
+        "heading": "Configurable Encryption Scope",
+        "body": "Not all payload fields need encryption — encrypting everything increases storage size and CPU overhead. We made encryption scope configurable: specify which field paths in the notification payload should be encrypted, and only those fields are encrypted at rest.\n\nThe configuration lists JSON path expressions (e.g., $.subscriber.email, $.payload.accountNumber). Before persisting, the system walks these paths, encrypts each value, and stores the result. On retrieval, the reverse operation runs. This granular approach means we can encrypt sensitive subscriber data while leaving non-sensitive routing metadata in plaintext for efficient querying."
+      },
+      {
+        "heading": "Audit Trail and Compliance",
+        "body": "Beyond masking and encryption, compliance requires an audit trail — who accessed which notification, when, and from where. We implemented an audit interceptor that logs access to notification payloads (not the payload content, just the access event) to a separate audit log table.\n\nThe audit log captures: notification ID, accessor identity (user or service account), timestamp, action (viewed, exported, replayed), and source IP. This table is append-only — no updates or deletes. Combined with PII masking in logs and AES encryption at rest, Alert Hub meets enterprise data protection requirements without sacrificing debugging and replay capabilities."
+      }
+    ]
+  },
+  {
+    "id": "async-notification-delivery",
+    "num": "10",
+    "title": "Asynchronous Notification Delivery — Design Patterns and Pitfalls",
+    "excerpt": "Moving from synchronous to asynchronous notification delivery in Spring Boot: @Async, thread pool tuning, error handling, and monitoring 20,000+ deliveries per day.",
+    "date": "Dec 2024",
+    "readTime": "8 min read",
+    "tags": [
+      "Spring Boot",
+      "Async",
+      "Performance",
+      "Architecture"
+    ],
+    "emoji": "🚀",
+    "bannerImage": "",
+    "sections": [
+      {
+        "heading": "The Synchronous Bottleneck",
+        "body": "Alert Hub initial implementation processed notifications synchronously: receive alert, route it, send to channel, wait for response, mark as delivered. Simple, easy to reason about — and completely unscalable.\n\nThe problem: sending an email takes 200-500ms. Sending an SMS may take 300-800ms. If you are processing 1,000 notifications and each takes 500ms synchronously, that is 500 seconds — over 8 minutes for a single batch. With 20,000 notifications per day, synchronous delivery was never going to work."
+      },
+      {
+        "heading": "Spring @Async — the Right Way",
+        "body": "@Async in Spring Boot is deceptively simple — add the annotation, enable it with @EnableAsync, and your method runs in a separate thread. The pitfall most developers hit: @Async only works when called from outside the bean (Spring proxies the call). Calling an @Async method from within the same class bypasses the proxy and runs synchronously.\n\nFor Alert Hub, each channel (Email, SMS, Push, IBM MQ, REST, File) has its own @Async delivery method. The caller submits notifications to each channel service and receives a CompletableFuture. These futures are collected and tracked — we can monitor per-channel delivery status without blocking the main processing thread."
+      },
+      {
+        "heading": "Thread Pool Configuration",
+        "body": "The default Spring @Async executor is a SimpleAsyncTaskExecutor that creates a new thread per task — fine for occasional background tasks, terrible for high-throughput systems. For Alert Hub, we configured a dedicated ThreadPoolTaskExecutor per channel.\n\nThread pool sizing: core threads equal number of available processors, max threads equal 4x core threads, queue capacity equals 1,000. Each channel gets its own pool so a slow Email gateway cannot starve SMS delivery. The pools are named (email-executor, sms-executor) which makes thread dumps readable — essential for diagnosing production issues."
+      },
+      {
+        "heading": "Error Handling in Async Contexts",
+        "body": "Error handling is where async code gets tricky. Exceptions thrown inside @Async methods do not propagate to the caller — they disappear into the thread pool unless you explicitly handle them.\n\nFor Alert Hub, every async delivery method returns CompletableFuture rather than void. The future carries either a success result or a failure with exception details. The orchestrator collects all futures, waits with a timeout, and processes results — marking deliveries as DELIVERED, FAILED, or TIMEOUT. Failed deliveries are queued for retry with exponential backoff."
+      },
+      {
+        "heading": "Monitoring: You Cannot Optimize What You Cannot See",
+        "body": "Async systems are harder to observe than synchronous ones. A synchronous failure shows up immediately in the request trace. An async failure might surface seconds later in a different thread, making it hard to correlate with the triggering event.\n\nFor Alert Hub, we implemented a delivery metrics table updated after each async completion: channel, status, latency, subscriber count, timestamp. A @Scheduled task aggregates this every minute into a summary (success rate, p50/p95/p99 latency, failure counts by channel). This dashboard became the primary operational tool — we could see in real time if the Email gateway was degraded, before subscribers started complaining."
+      }
+    ]
+  },
+  {
+    "id": "multi-channel-notification-architecture",
+    "num": "11",
+    "title": "Designing a Multi-Channel Notification Platform from Scratch",
+    "excerpt": "Architecture decisions behind Alert Hub — a unified notification engine supporting Email, SMS, Push, IBM MQ, JMS, REST, and File channels at enterprise scale.",
+    "date": "Nov 2024",
+    "readTime": "10 min read",
+    "tags": [
+      "Architecture",
+      "Spring Boot",
+      "Kafka",
+      "Design"
+    ],
+    "emoji": "📡",
+    "bannerImage": "",
+    "sections": [
+      {
+        "heading": "The Core Problem: One Interface, Many Channels",
+        "body": "Enterprise notification systems have a fundamental tension: upstream systems (billing, CRM, monitoring) want a single, simple API to send alerts. But downstream delivery requires completely different protocols — SMTP for email, HTTP/SMS gateway for SMS, Firebase for push, IBM MQ for enterprise messaging, REST callbacks for integrations, and file drops for batch systems.\n\nThe naive approach is to have separate APIs per channel. The right approach is a centralized notification integration utility — one API, one contract, many delivery adapters behind it."
+      },
+      {
+        "heading": "The Channel Adapter Pattern",
+        "body": "Alert Hub uses the adapter pattern at its core. A common NotificationRequest object carries the payload, recipient, priority, and desired channel. The routing engine inspects the channel field and dispatches to the appropriate adapter: EmailAdapter, SmsAdapter, PushAdapter, IbmMqAdapter, JmsAdapter, RestAdapter, FileAdapter.\n\nEach adapter implements a common interface: deliver(NotificationRequest) returning DeliveryResult. The adapter handles all channel-specific concerns: SMTP authentication for email, E.164 phone number formatting for SMS, topic/queue naming for MQ. Adding a new channel means writing a new adapter — no changes to the routing engine or upstream callers."
+      },
+      {
+        "heading": "Kafka as the Event Backbone",
+        "body": "The routing engine does not call adapters directly. Instead, it publishes to Kafka topics — one per channel (alerts.email, alerts.sms, alerts.push, etc.). Each channel has its own consumer group reading from its topic. This decouples routing from delivery: the router runs at full speed, and each channel consumer processes at its own rate.\n\nThis architecture gives independent scaling per channel. If the Email gateway is slow, we scale the email consumer group independently without touching SMS. We can pause a channel consumer during maintenance without affecting others. And Kafka log retention means we can replay any channel history for debugging or bulk resend operations."
+      },
+      {
+        "heading": "Priority and Fairness",
+        "body": "Not all notifications are equal. A password reset email is more urgent than a weekly newsletter. Alert Hub uses separate Kafka topics per priority tier: alerts.email.high, alerts.email.normal, alerts.email.low. Consumers poll high-priority topics first, then normal, then low.\n\nFairness across subscribers is handled at the adapter level. If a single subscriber has a burst of 10,000 notifications queued, they should not starve other subscribers. The adapter applies per-subscriber rate limiting using a Redis sliding window counter, rejecting excess messages back to a holding queue rather than processing them immediately."
+      },
+      {
+        "heading": "Observability: Knowing What is Happening",
+        "body": "A notification platform is only trustworthy if you can prove what happened. Alert Hub maintains a delivery log for every notification: receipt, routing decision, dispatch to channel, delivery attempt, result (success/fail/bounce), and any retry events. This gives a complete audit trail.\n\nBeyond individual records, we run aggregate analytics: delivery rate by channel, average latency by hour, failure rate by subscriber, and bounce rates by email domain. These metrics feed both a real-time dashboard and a daily report that goes to the platform team."
+      }
+    ]
+  },
+  {
+    "id": "smtp-sms-simulators",
+    "num": "12",
+    "title": "Building SMTP and SMS Simulators for Local Development",
+    "excerpt": "How we built lightweight SMTP and SMS simulator utilities so developers could test notification delivery locally without hitting real gateways or sending real messages.",
+    "date": "Oct 2024",
+    "readTime": "5 min read",
+    "tags": [
+      "Spring Boot",
+      "Testing",
+      "Developer Tools",
+      "Java"
+    ],
+    "emoji": "🔬",
+    "bannerImage": "",
+    "sections": [
+      {
+        "heading": "The Problem with Testing Notification Systems",
+        "body": "Developing notification systems creates a painful developer experience problem: you need to test that emails and SMS messages are sent correctly, but you cannot send real emails or SMS in development. Using production credentials risks sending test messages to real users. Using test credentials adds external dependencies that slow down the feedback loop.\n\nThe ideal solution: a local simulator that behaves like the real gateway, captures all outgoing messages, and makes them inspectable — without sending anything real."
+      },
+      {
+        "heading": "The SMTP Simulator",
+        "body": "The SMTP simulator is a Spring Boot application that starts an embedded SMTP server using SubEthaSMTP — a lightweight Java SMTP server library. It listens on port 2525 (configurable) and accepts all connections without authentication.\n\nEvery incoming email is captured in memory (and optionally persisted to a database for longer test sessions). A REST API exposes the captured messages: GET /messages returns all emails with full headers and body, DELETE /messages clears the inbox. A simple UI renders them. Alert Hub development configuration points its email adapter at localhost:2525, and developers can instantly see every email that would have been sent."
+      },
+      {
+        "heading": "The SMS Simulator",
+        "body": "SMS delivery uses HTTP-based gateway APIs (various providers use slightly different REST formats). The SMS simulator is a Spring Boot application that exposes the same HTTP contract as the real gateway — same endpoint structure, same request/response format — but instead of sending a message, it captures the request and returns a success response.\n\nThis makes it a drop-in replacement: change one config value (gateway.url) from the real gateway to http://localhost:8090, and all SMS goes to the simulator. The simulator admin API returns captured messages with recipient, body, sender, and timestamp. Integration tests run against the simulator, assert on the captured messages, and need no real gateway credentials."
+      },
+      {
+        "heading": "XML to Excel Conversion Utility",
+        "body": "Alert Hub ingests notification payloads from various upstream systems. One legacy system delivers payloads as XML files dropped in a shared directory. The reporting team needs the same data in Excel for analysis. Neither group wanted to change their format.\n\nWe built a bidirectional XML to Excel converter using Apache POI (for Excel) and JAXB (for XML). Configuration-driven: a YAML mapping file specifies which XML elements map to which Excel columns, data type conversions, and any transformation rules. The converter runs as a scheduled job and also exposes a REST endpoint for on-demand conversion. It handles nested XML structures, repeated elements (mapped to additional rows), and namespace-aware parsing."
+      },
+      {
+        "heading": "Making Developer Tools First-Class Citizens",
+        "body": "Internal tooling is often treated as an afterthought, but the simulators and converter utility became essential daily tools for the Alert Hub team. They are maintained in the same monorepo as the main application, with the same code review standards and test coverage requirements.\n\nThe key to making them useful: make them easy to run (single command, no config required for defaults), make the output obvious (the UI shows every message immediately), and make them accurate (the simulator returns the same error codes and response structure as the real gateway). A simulator that is hard to use or inaccurate teaches developers wrong lessons about the real system."
       }
     ]
   }
