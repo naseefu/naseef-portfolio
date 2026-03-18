@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import PageTransition from '../components/PageTransition'
 import { SplitLines } from '../components/Splittext'
-import MagneticButton from '../Components/MagenticButton'
+import MagneticButton from '../components/MagenticButton'
 
 const contacts = [
   { label: 'Email', value: 'naseefrahman90@gmail.com', href: 'mailto:naseefrahman90@gmail.com', copy: true },

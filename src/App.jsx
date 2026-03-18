@@ -9,11 +9,11 @@ import AwardsPage from './pages/AwardsPage'
 import ContactPage from './pages/ContactPage'
 import WorksPage from './pages/WorksPage'
 import { ThemeProvider } from './context/ThemeContext'
-import Cursor from './Components/Cursor'
-import Loader from './Components/Loader'
-import Navbar from './Components/Navbar'
-import ScrollProgress from './Components/ScrollProgress'
-import ScrollToTop from './Components/ScrollToTop'
+import Cursor from './components/Cursor'
+import Loader from './components/Loader'
+import Navbar from './components/Navbar'
+import ScrollProgress from './components/ScrollProgress'
+import ScrollToTop from './components/ScrollToTop'
 
 function AnimatedRoutes() {
   const location = useLocation()

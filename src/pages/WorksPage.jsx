@@ -2,8 +2,8 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useInView } from 'framer-motion'
 import projects from '../data/projects.json'
-import { SplitWords } from '../components/Splittext'
 import PageTransition from '../components/PageTransition'
+import { SplitWords } from '../components/Splittext'
 
 function ProjectCard({ project, index }) {
   const ref = useRef(null)
