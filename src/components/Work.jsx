@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion'
-import { SplitWords } from './Splittext'
+import { SplitWords } from './SplitText'
 import projects from '../data/Projects.json'
 
 const featured = projects.slice(0, 3)
