@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import articles from '../data/articles.json'
+import articles from '../data/Articles.json'
 import PageTransition from '../components/PageTransition'
 import { SplitWords } from '../components/Splittext'
 

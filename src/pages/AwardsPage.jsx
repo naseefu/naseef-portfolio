@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import awards from '../data/awards.json'
+import awards from '../data/Awards.json'
 import PageTransition from '../components/PageTransition'
 import { SplitWords } from '../components/Splittext'
 
