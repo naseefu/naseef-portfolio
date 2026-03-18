@@ -142,7 +142,7 @@ button { background: none; border: none; font-family: var(--font); cursor: point
 .work-card:hover { background: var(--bg-soft); }
 .work-card-image { width: 100%; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
 .work-card-emoji { width: 55%; aspect-ratio: 1; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
-.work-card-body { padding: 24px; }
+.work-card-body { padding: 44px 24px 44px 24px; }
 .work-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; gap: 8px; }
 .work-card-num { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); flex-shrink: 0; }
 .work-card-status { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--status-color); background: var(--status-bg); padding: 3px 10px; border-radius: 100px; white-space: nowrap; flex-shrink: 0; }
@@ -431,7 +431,7 @@ button { background: none; border: none; font-family: var(--font); cursor: point
   .page-title-huge { font-size: clamp(3rem, 14vw, 5rem) !important; }
   .works-grid { grid-template-columns: 1fr !important; }
   .work-card { border-right: none !important; }
-  .work-card-body { padding: 20px !important; }
+  .work-card-body { padding: 40px 22px 50px 22px !important; }
   .work-card-name { font-size: 1.35rem; }
   .work-card-footer { flex-direction: column; align-items: flex-start !important; gap: 10px; }
   .work-card-company { white-space: normal !important; }
