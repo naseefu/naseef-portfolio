@@ -4,7 +4,7 @@
     "num": "01",
     "title": "Building Agentic AI Applications with Spring AI",
     "excerpt": "A deep dive into creating tool-calling, context-aware AI agents using Spring AI, Groq, and the @Tool annotation pattern in Spring Boot 3.",
-    "date": "Mar 2025",
+    "date": "Jan 2026",
     "readTime": "8 min read",
     "tags": [
       "Spring AI",
@@ -46,7 +46,7 @@
     "num": "02",
     "title": "Kafka Consumer Groups & Partition Scaling in Spring Boot",
     "excerpt": "Everything you need to know about Kafka consumer groups, partition rebalancing, offset strategies, and scaling Spring Boot consumers correctly.",
-    "date": "Feb 2025",
+    "date": "Sep 2025",
     "readTime": "6 min read",
     "tags": [
       "Kafka",
@@ -83,7 +83,7 @@
     "num": "03",
     "title": "Virtual Threads in Spring Boot 3 — A Practical Guide",
     "excerpt": "How Java 21 virtual threads changed everything about non-blocking I/O in Spring Boot, and how to use them without shooting yourself in the foot.",
-    "date": "Jan 2025",
+    "date": "Nov 2025",
     "readTime": "5 min read",
     "tags": [
       "Java 21",
@@ -120,7 +120,7 @@
     "num": "04",
     "title": "Redis Caching Patterns for High-Throughput Spring Apps",
     "excerpt": "Cache-aside, write-through, and TTL strategies for using Redis effectively in Spring Boot applications handling millions of events daily.",
-    "date": "Dec 2024",
+    "date": "Dec 2025",
     "readTime": "7 min read",
     "tags": [
       "Redis",
@@ -158,7 +158,7 @@
     "num": "05",
     "title": "JWT Authentication with Spring Security 6",
     "excerpt": "Step-by-step implementation of stateless JWT authentication in Spring Boot 3 using the latest Spring Security 6 lambda DSL configuration.",
-    "date": "Nov 2024",
+    "date": "Nov 2025",
     "readTime": "10 min read",
     "tags": [
       "JWT",
@@ -195,7 +195,7 @@
     "num": "06",
     "title": "JPA Performance Optimization at Scale — Lessons from 20K+ Notifications/Day",
     "excerpt": "How I identified and fixed a growing JPA persistence context that was silently killing throughput, achieving a 60% reduction in database calls and 50-70% latency improvement.",
-    "date": "Apr 2025",
+    "date": "Nov 2025",
     "readTime": "9 min read",
     "tags": [
       "JPA",
@@ -233,7 +233,7 @@
     "num": "07",
     "title": "Delayed and Scheduled Notifications with ActiveMQ and Kafka",
     "excerpt": "Two approaches to implementing delayed message delivery — ActiveMQ native delay and a custom DB-backed Kafka delay scheduler — and when to use each.",
-    "date": "Mar 2025",
+    "date": "Aug 2025",
     "readTime": "7 min read",
     "tags": [
       "ActiveMQ",
@@ -271,7 +271,7 @@
     "num": "08",
     "title": "Building a Fail-Safe Notification Registration Utility",
     "excerpt": "How we built an-register-utility — a resilience layer that persists alert payloads during ANHUB downtime and replays them after recovery, ensuring zero message loss.",
-    "date": "Feb 2025",
+    "date": "Nov 2025",
     "readTime": "6 min read",
     "tags": [
       "Spring Boot",
@@ -309,7 +309,7 @@
     "num": "09",
     "title": "PII Masking and Encryption for Secure Notification Payloads",
     "excerpt": "A practical guide to implementing configurable PII masking with pattern-based redaction and AES encryption for notification payload storage in Spring Boot.",
-    "date": "Jan 2025",
+    "date": "Sep 2025",
     "readTime": "6 min read",
     "tags": [
       "Security",
@@ -347,7 +347,7 @@
     "num": "10",
     "title": "Asynchronous Notification Delivery — Design Patterns and Pitfalls",
     "excerpt": "Moving from synchronous to asynchronous notification delivery in Spring Boot: @Async, thread pool tuning, error handling, and monitoring 20,000+ deliveries per day.",
-    "date": "Dec 2024",
+    "date": "Dec 2025",
     "readTime": "8 min read",
     "tags": [
       "Spring Boot",
@@ -385,7 +385,7 @@
     "num": "11",
     "title": "Designing a Multi-Channel Notification Platform from Scratch",
     "excerpt": "Architecture decisions behind Alert Hub — a unified notification engine supporting Email, SMS, Push, IBM MQ, JMS, REST, and File channels at enterprise scale.",
-    "date": "Nov 2024",
+    "date": "Nov 2025",
     "readTime": "10 min read",
     "tags": [
       "Architecture",
@@ -423,7 +423,7 @@
     "num": "12",
     "title": "Building SMTP and SMS Simulators for Local Development",
     "excerpt": "How we built lightweight SMTP and SMS simulator utilities so developers could test notification delivery locally without hitting real gateways or sending real messages.",
-    "date": "Oct 2024",
+    "date": "Oct 2025",
     "readTime": "5 min read",
     "tags": [
       "Spring Boot",
