@@ -4,6 +4,7 @@ import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'fra
 import { SplitWords } from './SplitText'
 import projects from '../data/Projects.json'
 
+
 const featured = projects.slice(0, 3)
 
 function ProjectMedia({ bg, emoji, accentBg, image, name }) {
