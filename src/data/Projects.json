@@ -29,8 +29,36 @@
     "live": "#"
   },
   {
+  "id": "docmind-ai",
+  "num": "02",
+  "name": "DocMind",
+  "tagline": "AI-Powered RAG + Agentic AI Knowledge Platform",
+  "desc": "Context-aware AI system that combines RAG and agentic workflows to deliver accurate, grounded responses from documents and websites.",
+  "fullDesc": "DocMind is an AI-powered RAG (Retrieval-Augmented Generation) + Agentic AI platform designed to build intelligent, context-aware applications. It enables users to ingest documents and websites (including dynamic SPA applications) and interact with them through a conversational interface.\n\nThe system uses hybrid search (keyword + semantic) and reranking to retrieve highly relevant context, significantly improving accuracy and reducing hallucinations. It also introduces agentic capabilities through tool integration (e.g., web scraping), allowing the AI to perform multi-step reasoning and actions.\n\nBuilt with Spring Boot and Spring AI, DocMind supports multi-user environments, secure APIs, and scalable architecture. The platform is designed for real-world use cases such as knowledge assistants, enterprise search, and AI-powered copilots.",
+  "image": "https://github.com/naseefu/naseef-portfolio/blob/main/docmind-landing.png?raw=true",
+  "tags": ["Spring Boot", "Spring AI", "RAG", "Agentic AI", "Qdrant"],
+  "tech": ["Java", "Spring Boot", "Spring AI", "Qdrant", "MySQL", "Playwright", "JSoup", "React", "Vite", "Framer Motion", "Lucide Icons", "Groq API", "Ollama"],
+  "bg": "#eef2ff",
+  "emoji": "🧠",
+  "accentBg": "#e0e7ff",
+  "year": "2025",
+  "role": "Full Stack Developer",
+  "company": "Personal Project",
+  "status": "In Progress",
+  "highlights": [
+    "Hybrid search (keyword + semantic) with reranking for high-accuracy retrieval",
+    "Agentic AI with tool integration (web scraping, external data fetching)",
+    "Multi-source ingestion: PDFs, DOCX, PPTX, and dynamic websites (SPA)",
+    "Context-aware conversational AI with session memory",
+    "Scalable RAG pipeline built with Spring AI and vector database",
+    "Supports real-world use cases like knowledge assistants and AI copilots"
+  ],
+  "github": "https://github.com/",
+  "live": "#"
+},
+  {
     "id": "lustre",
-    "num": "02",
+    "num": "03",
     "name": "Lustre",
     "tagline": "E-Commerce Web Application",
     "desc": "A seamless online shopping experience tailored for Men's, Women's, and Kids' fashion, built with microservices architecture using Spring Cloud Gateway and Eureka.",
@@ -58,7 +86,7 @@
   },
   {
     "id": "fitsync",
-    "num": "03",
+    "num": "04",
     "name": "FitSync",
     "tagline": "AI-Powered Fitness Tracker",
     "desc": "A fitness tracker to log workouts, monitor progress, and get AI-powered personalized tips using Cohere AI.",
@@ -86,7 +114,7 @@
   },
   {
     "id": "zervings",
-    "num": "04",
+    "num": "05",
     "name": "Zervings",
     "tagline": "AI-Powered Recipe Generator",
     "desc": "An AI-powered recipe generator that creates personalized recipes based on available ingredients and dietary preferences using Cohere AI.",
@@ -114,7 +142,7 @@
   },
   {
     "id": "plotcraft",
-    "num": "05",
+    "num": "06",
     "name": "PlotCraft",
     "tagline": "AI-Powered Story Builder Platform",
     "desc": "An interactive platform for dynamic text generation, enabling users to create and expand stories seamlessly using AI.",
@@ -142,7 +170,7 @@
   },
   {
     "id": "taskflow",
-    "num": "06",
+    "num": "07",
     "name": "TaskFlow",
     "tagline": "Task Management Web Application",
     "desc": "Effortlessly manage teams, projects, and tasks by organizing projects under teams and assigning tasks for efficient tracking.",
@@ -170,7 +198,7 @@
   },
   {
     "id": "eventura",
-    "num": "07",
+    "num": "08",
     "name": "Eventura",
     "tagline": "Event Management Platform",
     "desc": "A platform that allows users to host and book events, featuring distinct roles for hosts and general users.",
@@ -198,7 +226,7 @@
   },
   {
     "id": "globetales",
-    "num": "08",
+    "num": "09",
     "name": "GlobeTales",
     "tagline": "Travel Blog Platform",
     "desc": "A platform for users to share travel blogs, discover destinations, and connect with fellow travellers.",
@@ -226,7 +254,7 @@
   },
   {
     "id": "inmakes-projects",
-    "num": "09",
+    "num": "10",
     "name": "Inmakes Infotech",
     "tagline": "Full Stack Java Development Internship",
     "desc": "End-to-end Java full-stack development across multiple client projects during internship, covering Spring Boot, Hibernate, MySQL, and ReactJS.",
