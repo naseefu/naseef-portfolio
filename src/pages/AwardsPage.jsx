@@ -172,7 +172,7 @@ export default function AwardsPage() {
           {[
             { num: awards.length, label: 'Total Awards' },
             { num: '1+', label: 'Years at TCS' },
-            { num: '5', label: 'TCS Recognitions' },
+            { num: '6', label: 'TCS Recognitions' },
           ].map(({ num, label }) => (
             <div className="awards-stat" key={label}>
               <span className="awards-stat-num">{num}</span>
