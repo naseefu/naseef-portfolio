@@ -13,7 +13,7 @@ const experience = [
       {
         title: 'Product Engineer',
         period: 'May 2025 – Present',
-        duration: '11 mos',
+        duration: '1+ yrs',
         type: 'Full-time',
         bullets: [
           'Designed and implemented event-driven alert processing using Apache Kafka and ActiveMQ for registering, processing, and delivering notifications',
