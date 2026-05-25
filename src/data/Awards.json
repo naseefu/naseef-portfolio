@@ -1,5 +1,16 @@
 [
   {
+  "id": "innovation-spark-tcs-gems",
+  "emoji": "🏆",
+  "title": "Innovation Spark Award",
+  "org": "Tata Consultancy Services",
+  "year": "May 2026",
+  "desc": "Honoured for playing a key role in the AI-driven BaNCS Desk solution that secured 1st place in the BaNCS AI POCs, built on a scalable, enterprise-ready Agentic & RAG-based architecture.",
+  "category": "Innovation",
+  "awardUrl": "https://github.com/naseefu/naseef-portfolio/blob/main/src/assets/IMG_4580.jpeg?raw=true"
+}
+,
+  {
     "id": "star-of-month",
     "emoji": "⭐",
     "title": "Star of the Month Award",
