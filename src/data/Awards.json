@@ -1,5 +1,15 @@
 [
   {
+  "id": "star-of-the-quarter",
+  "emoji": "🌟",
+  "title": "Star of the Quarter Award",
+  "org": "Tata Consultancy Services",
+  "year": "Jul 2026",
+  "desc": "Awarded for successfully designing and delivering AI-driven automation solutions leveraging Generative AI to accelerate engineering workflows, improve consistency, and reduce manual effort across development and compliance processes.",
+  "category": "Innovation",
+  "awardUrl": "https://github.com/naseefu/naseef-portfolio/blob/main/src/assets/Star_of_the_Quarter_Award_page-0001.jpg?raw=true"
+},
+  {
   "id": "innovation-spark-tcs-gems",
   "emoji": "🏆",
   "title": "Innovation Spark Award",
