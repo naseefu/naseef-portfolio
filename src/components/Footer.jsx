@@ -1,8 +1,9 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { SplitLines } from './SplitText'
 import MagneticButton from './MagenticButton'
+import { api } from '../api/client'
 
 const footerLinks = [
   { label: 'Work', to: '/work' },
@@ -13,8 +14,15 @@ const footerLinks = [
 
 export default function Footer() {
   const [copied, setCopied] = useState(false)
+  const [views, setViews] = useState(null)
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+
+  useEffect(() => {
+    api.recordView()
+      .then(res => setViews(res.count))
+      .catch(err => console.error('Failed to record view:', err))
+  }, [])
 
   const copyEmail = () => {
     navigator.clipboard.writeText('naseefrahman90@gmail.com')
@@ -65,7 +73,10 @@ export default function Footer() {
             </motion.a>
           ))}
         </div>
-        <p className="footer-copy">NASEEFU RAHMAN – {new Date().getFullYear()}©</p>
+        <p className="footer-copy">
+          NASEEFU RAHMAN – {new Date().getFullYear()}©
+          {views !== null && <span style={{ marginLeft: 16, opacity: 0.6 }}>👁️ {views} Profile Views</span>}
+        </p>
       </motion.div>
     </footer>
   )

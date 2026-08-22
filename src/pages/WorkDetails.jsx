@@ -1,14 +1,20 @@
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import projects from '../data/Projects.json'
 import PageTransition from '../components/PageTransition'
 import { SplitLines } from '../components/SplitText'
+import { useApi } from '../hooks/useApi'
+import { api } from '../api/client'
+import { WorkDetailSkeleton } from '../components/SkeletonLoader'
 
 export default function WorkDetail() {
   const { id } = useParams()
-  const project = projects.find(p => p.id === id)
-  const currentIndex = projects.findIndex(p => p.id === id)
-  const nextProject = projects[(currentIndex + 1) % projects.length]
+  const { data: projects, loading } = useApi(() => api.getProjects())
+
+  if (loading) return <PageTransition><WorkDetailSkeleton /></PageTransition>
+
+  const project = (projects || []).find(p => p.id === id)
+  const currentIndex = (projects || []).findIndex(p => p.id === id)
+  const nextProject = projects ? projects[(currentIndex + 1) % projects.length] : null
 
   if (!project) return (
     <div style={{ textAlign: 'center', paddingTop: 160 }}>

@@ -98,6 +98,7 @@ button { background: none; border: none; font-family: var(--font); cursor: point
 .hero-badge-pill { position: absolute; bottom: -14px; right: -20px; background: var(--bg); border: 1.5px solid var(--border); border-radius: 100px; padding: 8px 16px; font-size: 0.73rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); display: flex; align-items: center; gap: 7px; white-space: nowrap; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
 .status-dot-green { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; animation: blink 2s ease-in-out infinite; display: inline-block; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.35} }
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ─── Shared ─────────────────────────────────────────────────────── */
 .section-header-row { display: flex; align-items: baseline; justify-content: space-between; padding: 80px 40px 56px; border-bottom: 1px solid var(--border); }
@@ -666,3 +667,35 @@ button { background: none; border: none; font-family: var(--font); cursor: point
   .footer-nav-row { gap: 16px; padding: 20px; }
   .footer-bottom { flex-direction: column-reverse !important; gap: 14px; align-items: flex-start !important; padding: 20px !important; }
 }
+
+/* ─── Skeleton / Shimmer ─────────────────────────────────────────── */
+@keyframes skeleton-shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+
+.skeleton-bone {
+  display: block;
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-base)    0%,
+    var(--skeleton-shine)  50%,
+    var(--skeleton-base)  100%
+  );
+  background-size: 600px 100%;
+  animation: skeleton-shimmer 1.6s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* Light theme skeleton colours */
+:root {
+  --skeleton-base:  #ececec;
+  --skeleton-shine: #f8f8f8;
+}
+
+/* Dark theme skeleton colours */
+[data-theme="dark"] {
+  --skeleton-base:  #1e1e1e;
+  --skeleton-shine: #2a2a2a;
+}
+

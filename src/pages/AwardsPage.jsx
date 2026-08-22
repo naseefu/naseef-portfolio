@@ -1,8 +1,10 @@
 import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import awards from '../data/Awards.json'
 import PageTransition from '../components/PageTransition'
 import { SplitWords } from '../components/SplitText'
+import { useApi } from '../hooks/useApi'
+import { api } from '../api/client'
+import { AwardsPageSkeleton } from '../components/SkeletonLoader'
 
 function AwardPopup({ award, onClose }) {
   const [imgLoaded, setImgLoaded] = useState(false)
@@ -145,6 +147,7 @@ function AwardCard({ award, index, onView }) {
 }
 
 export default function AwardsPage() {
+  const { data: awards, loading } = useApi(() => api.getAwards())
   const statsRef = useRef(null)
   const statsInView = useInView(statsRef, { once: true })
   const [activeAward, setActiveAward] = useState(null)
@@ -170,7 +173,7 @@ export default function AwardsPage() {
           style={{ opacity: statsInView ? 1 : 0, transition: 'opacity 0.6s ease 0.2s' }}
         >
           {[
-            { num: awards.length, label: 'Total Awards' },
+            { num: awards ? awards.length : '…', label: 'Total Awards' },
             { num: '1+', label: 'Years at TCS' },
             { num: '7', label: 'TCS Recognitions' },
           ].map(({ num, label }) => (
@@ -182,9 +185,12 @@ export default function AwardsPage() {
         </div>
 
         <div className="awards-grid">
-          {awards.map((a, i) => (
-            <AwardCard key={a.id} award={a} index={i} onView={setActiveAward} />
-          ))}
+          {loading
+            ? <AwardsPageSkeleton count={6} />
+            : (awards || []).map((a, i) => (
+                <AwardCard key={a.id} award={a} index={i} onView={setActiveAward} />
+              ))
+          }
         </div>
       </div>
 

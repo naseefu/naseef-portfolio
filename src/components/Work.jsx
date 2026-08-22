@@ -2,10 +2,8 @@ import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { SplitWords } from './SplitText'
-import projects from '../data/Projects.json'
-
-
-const featured = projects.slice(0, 3)
+import { useApi } from '../hooks/useApi'
+import { api } from '../api/client'
 
 function ProjectMedia({ bg, emoji, accentBg, image, name }) {
   const ref = useRef(null)
@@ -93,6 +91,9 @@ function ProjectRow({ project }) {
 }
 
 export default function Work() {
+  const { data: projects, loading } = useApi(() => api.getProjects())
+  const featured = projects ? projects.slice(0, 3) : []
+
   const headerRef = useRef(null)
   const headerInView = useInView(headerRef, { once: true })
   const footerRef = useRef(null)
@@ -108,17 +109,20 @@ export default function Work() {
       </div>
 
       <div className="projects-list">
-        {featured.map(p => <ProjectRow key={p.id} project={p} />)}
+        {loading
+          ? <p style={{ padding: '40px', opacity: 0.4 }}>Loading projects…</p>
+          : featured.map(p => <ProjectRow key={p.id} project={p} />)
+        }
       </div>
 
-      {/* View all — plain div, no y-transform that could offset click target */}
+      {/* View all */}
       <div
         ref={footerRef}
         className="work-view-all"
         style={{ opacity: footerInView ? 1 : 0, transition: 'opacity 0.6s ease' }}
       >
         <Link to="/work" className="work-view-all-link">
-          View all {projects.length} projects →
+          View all {projects ? projects.length : '…'} projects →
         </Link>
       </div>
     </section>

@@ -1,8 +1,10 @@
 import { useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { motion, useInView } from 'framer-motion'
-import articles from '../data/Articles.json'
 import PageTransition from '../components/PageTransition'
+import { useApi } from '../hooks/useApi'
+import { api } from '../api/client'
+import { ArticleDetailSkeleton } from '../components/SkeletonLoader'
 
 function Section({ section, index }) {
   const ref = useRef(null)
@@ -34,22 +36,20 @@ function Section({ section, index }) {
 
 export default function ArticleDetail() {
   const { id } = useParams()
+  const { data: articles, loading } = useApi(() => api.getArticles())
 
-  console.log('Route ID:', id)
+  if (loading) return <PageTransition><ArticleDetailSkeleton /></PageTransition>
 
-  const article = articles.find(a => a.id === id)
-  const currentIndex = articles.findIndex(a => a.id === id)
+  const article = (articles || []).find(a => a.id === id)
+  const currentIndex = (articles || []).findIndex(a => a.id === id)
 
-  console.log('Found article:', article)
-  console.log('Index:', currentIndex)
-
-  // ✅ Safe fallback for next article
+  // Safe fallback for next article
   const nextArticle =
-    currentIndex >= 0
+    articles && currentIndex >= 0
       ? articles[(currentIndex + 1) % articles.length]
-      : articles[0]
+      : null
 
-  // ✅ If article not found
+  // If article not found
   if (!article) {
     return (
       <div style={{ textAlign: 'center', paddingTop: 160 }}>

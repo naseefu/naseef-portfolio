@@ -1,41 +1,8 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { SplitWords } from './SplitText'
-
-const experience = [
-  {
-    period: '2025 – Present',
-    role: 'TCS, Software / Product Engineer.',
-    location: 'Kerala, India · Full-time',
-    desc: 'Leading development of Alert Hub — an enterprise-grade, AI-integrated multi-channel notification platform. Received Star Performer, On-the-Spot Award & tcsAI Idea Igniter recognition.',
-  },
-  {
-    period: 'Nov 2024 – Apr 2024',
-    role: 'Inmakes Infotech, Full Stack Developer.',
-    location: 'Kerala, India · Internship',
-    desc: 'Focused on Java full-stack development with Spring Boot, Hibernate, and ReactJS. Covered backend development, MySQL data management, RESTful API integration, and dynamic frontends.',
-  },
-  {
-    period: '2020 – 2024',
-    role: 'NSS College of Engineering, B.Tech CSE.',
-    location: 'Kerala, India · Education',
-    desc: 'Graduated with a B.Tech in Computer Science, focusing on distributed systems, backend engineering, algorithms, and system design.',
-  },
-]
-
-const awards = [
-  { emoji: '⭐', label: 'Star Performer – TCS' },
-  { emoji: '⚡', label: 'On-the-Spot Award' },
-  { emoji: '🤖', label: 'tcsAI Idea Igniter' },
-  { emoji: '✨', label: 'tcsAI Spark' },
-  { emoji: '📚', label: 'Learning Achievement' },
-]
-
-const skills = [
-  'Java', 'Spring Boot', 'Spring AI', 'Kafka', 'ActiveMQ',
-  'Redis', 'PostgreSQL', 'Docker', 'JWT', 'REST APIs',
-  'LangChain', 'LangGraph', 'WebSocket', 'Microservices',
-]
+import { useApi } from '../hooks/useApi'
+import { api } from '../api/client'
 
 function TimelineRow({ item, index }) {
   const ref = useRef(null)
@@ -61,6 +28,12 @@ function TimelineRow({ item, index }) {
 }
 
 export default function About() {
+  const { data: profile } = useApi(() => api.getProfile())
+  const about = profile?.about || {}
+  const skills    = about.skills    || []
+  const timeline  = about.timeline  || []
+  const awardChips = about.awardChips || []
+
   const headerRef = useRef(null)
   const headerInView = useInView(headerRef, { once: true })
   const bioRef = useRef(null)
@@ -77,27 +50,18 @@ export default function About() {
       <div className="about-bio-row" ref={bioRef}>
         <div
           className="about-bio-left"
-          style={{
-            opacity: bioInView ? 1 : 0,
-            transition: 'opacity 0.7s ease 0.05s',
-          }}
+          style={{ opacity: bioInView ? 1 : 0, transition: 'opacity 0.7s ease 0.05s' }}
         >
           <p className="about-tagline">
-            Building robust backend systems that scale without breaking a sweat.
+            {about.tagline || 'Building robust backend systems that scale without breaking a sweat.'}
           </p>
         </div>
         <div
           className="about-bio-right"
-          style={{
-            opacity: bioInView ? 1 : 0,
-            transition: 'opacity 0.7s ease 0.18s',
-          }}
+          style={{ opacity: bioInView ? 1 : 0, transition: 'opacity 0.7s ease 0.18s' }}
         >
           <p className="about-bio-text">
-            My name is Naseef, and I'm a Backend & Product Engineer at TCS based in Kerala, India.
-            I specialise in distributed systems, event-driven architectures, and AI-integrated backend
-            platforms — currently engineering a high-throughput notification system processing millions
-            of events daily.
+            {about.bio || ''}
           </p>
           <div className="about-skills" ref={skillsRef}>
             {skills.map((s, i) => (
@@ -112,11 +76,11 @@ export default function About() {
       </div>
 
       <div className="timeline-rows">
-        {experience.map((item, i) => <TimelineRow key={i} item={item} index={i} />)}
+        {timeline.map((item, i) => <TimelineRow key={i} item={item} index={i} />)}
       </div>
 
       <div className="awards-strip">
-        {awards.map((a, i) => (
+        {awardChips.map((a, i) => (
           <motion.span
             className="award-chip" key={a.label}
             style={{ opacity: 0 }}
