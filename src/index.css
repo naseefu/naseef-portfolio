@@ -91,6 +91,13 @@ button { background: none; border: none; font-family: var(--font); cursor: point
 .hero-eyebrow::before { content: ''; width: 28px; height: 1.5px; background: var(--text-dim); }
 .hero-title { font-size: clamp(3.5rem, 10vw, 10.8rem); font-weight: 800; line-height: 0.93; letter-spacing: -0.045em; margin-bottom: 36px; }
 .hero-desc { font-size: 0.98rem; color: var(--text-muted); line-height: 1.78; max-width: 500px; }
+.hero-title-skeleton { display: block; min-height: clamp(3.5rem, 10vw, 10.8rem); margin-bottom: 36px; }
+.hero-title-skeleton .skeleton-bone { width: min(72%, 520px); height: 0.86em; border-radius: 0.08em; }
+.hero-description-skeletons { display: flex; flex-direction: column; gap: 10px; max-width: 500px; }
+.hero-desc-skeleton { height: 14px; border-radius: 4px; }
+.hero-desc-skeleton-wide { width: 100%; }
+.hero-desc-skeleton-medium { width: 76%; }
+.hero-desc-skeleton-spaced { margin-top: 4px; }
 .hero-email-row { margin-top: 44px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .hero-email-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--text); color: var(--bg); padding: 14px 28px; border-radius: 100px; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; font-family: var(--font); border: none; }
 .hero-email-btn:hover { opacity: 0.78; }

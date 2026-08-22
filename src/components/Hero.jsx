@@ -22,10 +22,10 @@ export default function Hero() {
   const { data: profile, loading } = useApi(() => api.getProfile())
 
   const email = profile?.email || profile?.hero?.email || profile?.contact?.email || 'naseefrahman90@gmail.com'
-  const title = profile?.title || profile?.hero?.title || 'Backend Engineer.'
+  const title = profile?.title || profile?.hero?.title || ''
   const eyebrow = profile?.hero?.eyebrow || 'Backend & Product Engineer'
-  const desc1 = profile?.hero?.desc1 || "Currently leading the design & development of TCS's enterprise notification platform called \"Alerts & Notification Hub.\""
-  const desc2 = profile?.hero?.desc2 || "In my spare time, I build side projects and explore AI-integrated distributed systems."
+  const desc1 = profile?.hero?.desc1 || ''
+  const desc2 = profile?.hero?.desc2 || ''
   const name = profile?.name || profile?.hero?.name || "Naseef Rahman"
   const statusBadge = profile?.hero?.statusBadge || "Available for freelance"
   const dpUrl = profile?.hero?.profileImage || PROFILE_IMAGE_URL
@@ -84,13 +84,26 @@ export default function Hero() {
           <motion.p className="hero-eyebrow" {...fadeUp(0.35)}>
             {eyebrow}
           </motion.p>
-          <SplitLines lines={[title]} className="hero-title" delay={0.45} />
-          <motion.p className="hero-desc" {...fadeUp(0.75)}>
-            {desc1}
-          </motion.p>
-          <motion.p className="hero-desc" style={{ marginTop: 14 }} {...fadeUp(0.82)}>
-            {desc2}
-          </motion.p>
+          {loading ? (
+            <div className="hero-title hero-title-skeleton" aria-label="Loading title" role="status">
+              <span className="skeleton-bone" />
+            </div>
+          ) : (
+            title && <SplitLines lines={[title]} className="hero-title" delay={0.45} />
+          )}
+          {loading ? (
+            <div className="hero-description-skeletons" aria-label="Loading description" role="status">
+              <span className="skeleton-bone hero-desc-skeleton hero-desc-skeleton-wide" />
+              <span className="skeleton-bone hero-desc-skeleton hero-desc-skeleton-medium" />
+              <span className="skeleton-bone hero-desc-skeleton hero-desc-skeleton-spaced hero-desc-skeleton-wide" />
+              <span className="skeleton-bone hero-desc-skeleton hero-desc-skeleton-medium" />
+            </div>
+          ) : (
+            <>
+              {desc1 && <motion.p className="hero-desc" {...fadeUp(0.75)}>{desc1}</motion.p>}
+              {desc2 && <motion.p className="hero-desc" style={{ marginTop: 14 }} {...fadeUp(0.82)}>{desc2}</motion.p>}
+            </>
+          )}
           <motion.div className="hero-email-row" {...fadeUp(0.95)}>
             <MagneticButton className={`hero-email-btn ${copied ? 'copied' : ''}`} onClick={copyEmail}>
               {copied ? (
